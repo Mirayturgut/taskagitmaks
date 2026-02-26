@@ -106,7 +106,33 @@ app.MapGet("/api/leaderboard", async (AppDbContext db) =>
 
     return Results.Ok(board);
 });
-app.Urls.Add("http://0.0.0.0:5028");
+app.MapDelete("/api/admin/delete-player/{name}", async (
+    string name,
+    HttpRequest request,
+    AppDbContext db,
+    IConfiguration config) =>
+{
+    // 🔐 Admin Key kontrolü
+    var adminKeyFromHeader = request.Headers["x-admin-key"].ToString();
+    var realAdminKey = config["AdminKey"];
+
+    if (adminKeyFromHeader != realAdminKey)
+        return Results.Unauthorized();
+
+    // O oyuncunun tüm kayıtlarını bul
+    var records = await db.GameResults
+        .Where(x => x.PlayerName == name)
+        .ToListAsync();
+
+    if (!records.Any())
+        return Results.NotFound();
+
+    db.GameResults.RemoveRange(records);
+    await db.SaveChangesAsync();
+
+    return Results.Ok(new { deleted = name });
+});
+
 
 app.Run();
 
