@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Taş Kağıt Makas • Best of 5</title>
+    <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+<div class="bg"></div>
+
+<main class="wrap">
+    <header class="top">
+        <div>
+            <h1>Taş • Kağıt • Makas</h1>
+            <p class="sub">Best of 5’e ulaşan kazanır.✨</p>
+        </div>
+        <button class="badge" id="lbBtn" type="button">Leader Board</button>
+    </header>
+
+    <section class="card" id="setupCard">
+        <h2>Oyuncu Bilgisi</h2>
+        <div class="row">
+            <label class="field">
+                <span>İsmin</span>
+                <input id="nameInput" maxlength="18" placeholder="Miray" />
+            </label>
+
+            <label class="field">
+                <span>Hedef Skor</span>
+                <input value="5" disabled />
+            </label>
+
+            <button class="btn primary" id="startBtn" type="button">Başlat</button>
+        </div>
+    </section>
+
+    <section class="card hidden" id="gameCard">
+        <div class="scorebar">
+            <div class="who">
+                <div class="mini">Oyuncu</div>
+                <div class="big" id="playerName">—</div>
+            </div>
+
+            <div class="score">
+                <div class="pill"><span id="pScore">0</span></div>
+                <div class="vs">VS</div>
+                <div class="pill"><span id="cScore">0</span></div>
+            </div>
+
+            <div class="who right">
+                <div class="mini">Bilgisayar</div>
+                <div class="big">CPU</div>
+            </div>
+        </div>
+
+        <div class="arena">
+            <div class="hand">
+                <div class="label" id="pLabel">Sen</div>
+                <div class="icon" id="pIcon">❔</div>
+            </div>
+
+            <div class="mid">
+                <div class="result" id="resultText">Hamleni seç 👇</div>
+                <div class="round" id="roundText">Round: 1</div>
+            </div>
+
+            <div class="hand">
+                <div class="label">CPU</div>
+                <div class="icon" id="cIcon">❔</div>
+            </div>
+        </div>
+
+        <div class="picks">
+            <button class="pick" type="button" data-choice="rock"><span class="e">🪨</span><span>Taş</span></button>
+            <button class="pick" type="button" data-choice="paper"><span class="e">📄</span><span>Kağıt</span></button>
+            <button class="pick" type="button" data-choice="scissors"><span class="e">✂️</span><span>Makas</span></button>
+        </div>
+
+        <div class="actions">
+            <button class="btn" id="resetBtn" type="button">Sıfırla</button>
+            <button class="btn danger" id="quitBtn" type="button">Oyunu Bitir</button>
+        </div>
+
+        <div class="log" id="log"></div>
+    </section>
+
+    <!-- Modal (başlangıçta KAPALI) -->
+    <div class="modal hidden" id="modal" aria-hidden="true">
+        <div class="modalCard">
+            <div class="spark" id="spark">🎉</div>
+            <h2 id="modalTitle">Kazandın!</h2>
+            <p id="modalDesc">Skor 5 oldu.</p>
+
+            <div class="modalBtns">
+                <button class="btn primary" id="playAgainBtn" type="button">Tekrar Oyna</button>
+                <button class="btn" id="closeModalBtn" type="button">Kapat</button>
+            </div>
+
+            <p class="tiny">LinkedIn için: ekran görüntüsü + kısa açıklama paylaşabilirsin.</p>
+        </div>
+    </div>
+    <div class="modal hidden" id="lbModal" aria-hidden="true">
+        <div class="modalCard">
+            <h2 style="margin:0 0 10px">🏆 Leaderboard</h2>
+            <div id="lbContent" class="tiny">Yükleniyor...</div>
+            <div class="modalBtns">
+                <button class="btn" id="lbCloseBtn" type="button">Kapat</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/js/site.js"></script>
+</body>
+</html>
