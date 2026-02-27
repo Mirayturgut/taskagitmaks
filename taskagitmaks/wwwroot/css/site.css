@@ -221,61 +221,48 @@ h1{ margin:0; font-size: 34px; }
     height: 85vh;
   }
 }
-/* ===== FORCE LEADERBOARD MODAL SCROLL (PUT THIS AT THE VERY BOTTOM) ===== */
+/* ===== LEADERBOARD MODAL (SAFE) ===== */
 
+/* default kapalı */
 #lbModal{
-  position: fixed !important;
-  inset: 0 !important;
-  background: rgba(0,0,0,.55) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 16px !important;
-  z-index: 9999 !important;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  padding: 16px;
+  z-index: 9999;
 
-  /* modal overlay scrolly olabilsin */
-  overflow-y: auto !important;
+  display: none;              /* 🔥 kritik: kapalı */
+  align-items: center;
+  justify-content: center;
+
+  overflow-y: auto;
+}
+
+/* sadece hidden değilken aç */
+#lbModal:not(.hidden){
+  display: flex;              /* 🔥 kritik: sadece açıkken */
+}
+
+/* güvenlik: hidden her zaman kapatsın */
+#lbModal.hidden{
+  display: none !important;
 }
 
 #lbModal .modalCard{
-  width: min(520px, 100%) !important;
-
-  /* 🔥 burada kritik: yükseklik kesin sınır */
-  max-height: calc(100vh - 32px) !important; /* 16px padding x2 */
-  height: auto !important;
-
-  border-radius: 24px !important;
-  border: 1px solid var(--stroke) !important;
-  background: rgba(20,20,30,.72) !important;
-  backdrop-filter: blur(14px) !important;
-  padding: 18px !important;
-  text-align: center !important;
-
-  display: flex !important;
-  flex-direction: column !important;
-
-  /* kart uzamasın */
-  overflow: hidden !important;
+  width: min(520px, 100%);
+  max-height: calc(100vh - 32px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-/* 🔥 sadece içerik scroll */
 #lbModal #lbContent{
-  flex: 1 1 auto !important;
-  min-height: 0 !important;
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch !important;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* butonlar sabit kalsın */
 #lbModal .modalBtns{
-  flex: 0 0 auto !important;
-}
-
-/* Sticky header istiyorsan */
-#lbModal .table thead th{
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 5 !important;
-  background: rgba(20,20,30,.95) !important;
-  backdrop-filter: blur(10px) !important;
+  flex: 0 0 auto;
 }
