@@ -100,10 +100,28 @@
         </div>
     </div>
     <div class="modal hidden" id="lbModal" aria-hidden="true">
-        <div class="modalCard">
-            <h2 style="margin:0 0 10px">🏆 Leaderboard</h2>
-            <div id="lbContent" class="tiny">Yükleniyor...</div>
-            <div class="modalBtns">
+        <div class="modalCard"
+             style="
+         width:min(520px,100%);
+         max-height:calc(100vh - 32px);
+         display:flex;
+         flex-direction:column;
+         overflow:hidden;
+       ">
+            <h2 style="margin:0 0 10px; flex:0 0 auto;">🏆 Leaderboard</h2>
+
+            <div id="lbContent" class="tiny"
+                 style="
+           flex:1 1 auto;
+           min-height:0;
+           overflow:auto;
+           -webkit-overflow-scrolling:touch;
+           margin-top:10px;
+         ">
+                Yükleniyor...
+            </div>
+
+            <div class="modalBtns" style="flex:0 0 auto;">
                 <button class="btn" id="lbCloseBtn" type="button">Kapat</button>
             </div>
         </div>

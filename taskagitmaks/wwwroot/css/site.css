@@ -162,43 +162,120 @@ h1{ margin:0; font-size: 34px; }
   padding-top: 10px;
 }
 
-/* Modal */
-.modal{
-  position:fixed; inset:0;
-  background: rgba(0,0,0,.55);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding: 16px;
-  z-index: 9999;
-}
+/* ===== LEADERBOARD MODAL SCROLL FIX ===== */
+
 .modalCard{
-  width:min(520px, 100%);
+  width: min(520px, 100%);
   border-radius: 24px;
   border: 1px solid var(--stroke);
   background: rgba(20,20,30,.72);
   backdrop-filter: blur(14px);
   padding: 18px;
-  text-align:center;
-}
-.modalBtns{ display:flex; gap: 10px; justify-content:center; margin-top:12px; flex-wrap:wrap; }
-.tiny{ color: var(--muted); font-size: 12px; margin-top:10px; }
+  text-align: center;
 
-@media (max-width: 760px){
-  .row{ grid-template-columns: 1fr; }
-  .arena{ grid-template-columns: 1fr; }
-  .icon{ font-size: 60px; }
-  h1{ font-size: 28px; }
+  /* 🔥 SABİT YÜKSEKLİK */
+  height: 80vh;
+  max-height: 620px;
+
+  /* 🔥 FLEX LAYOUT */
+  display: flex;
+  flex-direction: column;
+
+  /* 🔥 UZAMAYI KES */
+  overflow: hidden;
 }
-.table{
-  width:100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  font-size: 13px;
+
+/* 🔥 SADECE TABLO ALANI SCROLL OLSUN */
+#lbContent{
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  margin: 10px 0;
+
+  /* Mobil scroll iyileştirme */
+  -webkit-overflow-scrolling: touch;
 }
-.table th, .table td{
-  border-bottom: 1px solid rgba(255,255,255,.10);
-  padding: 10px 8px;
-  text-align:left;
+
+/* Butonlar altta sabit */
+.modalBtns{
+  flex: 0 0 auto;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 12px;
+  flex-wrap: wrap;
 }
-.table th{ color: rgba(255,255,255,.75); font-weight: 800; }
+
+/* Sticky table header */
+.table thead th{
+  position: sticky;
+  top: 0;
+  background: rgba(20,20,30,.95);
+  backdrop-filter: blur(10px);
+  z-index: 5;
+}
+
+/* Mobil için */
+@media (max-width: 600px){
+  .modalCard{
+    height: 85vh;
+  }
+}
+/* ===== FORCE LEADERBOARD MODAL SCROLL (PUT THIS AT THE VERY BOTTOM) ===== */
+
+#lbModal{
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,.55) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+  z-index: 9999 !important;
+
+  /* modal overlay scrolly olabilsin */
+  overflow-y: auto !important;
+}
+
+#lbModal .modalCard{
+  width: min(520px, 100%) !important;
+
+  /* 🔥 burada kritik: yükseklik kesin sınır */
+  max-height: calc(100vh - 32px) !important; /* 16px padding x2 */
+  height: auto !important;
+
+  border-radius: 24px !important;
+  border: 1px solid var(--stroke) !important;
+  background: rgba(20,20,30,.72) !important;
+  backdrop-filter: blur(14px) !important;
+  padding: 18px !important;
+  text-align: center !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  /* kart uzamasın */
+  overflow: hidden !important;
+}
+
+/* 🔥 sadece içerik scroll */
+#lbModal #lbContent{
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* butonlar sabit kalsın */
+#lbModal .modalBtns{
+  flex: 0 0 auto !important;
+}
+
+/* Sticky header istiyorsan */
+#lbModal .table thead th{
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 5 !important;
+  background: rgba(20,20,30,.95) !important;
+  backdrop-filter: blur(10px) !important;
+}
